@@ -3,16 +3,22 @@ kind: Ingress
 metadata:
   name: nextcloud-ingress
   namespace: nextcloud
+  annotations:
+    nginx.ingress.kubernetes.io/affinity: "cookie"
+    nginx.ingress.kubernetes.io/affinity-mode: "persistent"
+    nginx.ingress.kubernetes.io/session-cookie-name: "route"
+    nginx.ingress.kubernetes.io/session-cookie-max-age: "172800"
+    nginx.ingress.kubernetes.io/session-cookie-expires: "172800"
 spec:
   ingressClassName: nginx
   rules:
-    - host: nextcloud.vnpt.com
-      http:
-        paths:
-          - pathType: Prefix
-            backend:
-              service:
-                name: nextcloud-service
-                port:
-                  number: 80
-            path: / 
+  - host: nextcloud.vnpt.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: nextcloud-service
+            port:
+              number: 80
