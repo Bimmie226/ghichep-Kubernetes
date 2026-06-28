@@ -13,6 +13,7 @@ spec:
       labels:
         app: nextcloud
     spec:
+      nodeName: k8s-master-02
       containers:
       - name: nextcloud
         image: nextcloud:latest
