@@ -19,7 +19,7 @@ metadata:
   name: nextcloud-deployment
   namespace: nextcloud
 spec:
-  replicas: 1
+  replicas: 4
   selector:
     matchLabels:
       app: nextcloud
@@ -28,7 +28,6 @@ spec:
       labels:
         app: nextcloud
     spec:
-      nodeName: k8s-master-02
       containers:
       - name: nextcloud
         image: nextcloud:latest
